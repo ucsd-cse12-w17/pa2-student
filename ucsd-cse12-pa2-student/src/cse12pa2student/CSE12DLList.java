@@ -4,14 +4,14 @@ public class CSE12DLList<E> implements CSE12List<E> {
 
 	private Node<E> head, tail;
 	private int size;
-	
+
 	public CSE12DLList() {
 		this.head = new Node<E>(null, null, null);
 		this.tail = new Node<E>(null, null, this.head);
 		this.head.succ = tail;
 		this.tail.prev = head;
 	}
-	
+
 	@Override
 	public void append(E e) {
 		this.size += 1;
@@ -30,8 +30,8 @@ public class CSE12DLList<E> implements CSE12List<E> {
 
 	@Override
 	public void empty() {
-		this.head = new Node<E>(null, null, null);
-		this.tail = this.head;
+		this.head.succ = tail;
+		this.tail.prev = head;
 		this.size = 0;
 	}
 
@@ -42,11 +42,11 @@ public class CSE12DLList<E> implements CSE12List<E> {
 
 	@Override
 	public E getAt(int index) {
-		if(index >= this.size || index < 0) {
+		if (index >= this.size || index < 0) {
 			throw new IndexOutOfBoundsException("Index " + index + " out of bounds.");
 		}
 		Node<E> curr = head.succ;
-		while(index > 0 && curr.value != null) {
+		while (index > 0 && curr.value != null) {
 			curr = curr.succ;
 			index -= 1;
 		}
@@ -69,6 +69,5 @@ public class CSE12DLList<E> implements CSE12List<E> {
 		/** TODO **/
 		return -1;
 	}
-	
 
 }
